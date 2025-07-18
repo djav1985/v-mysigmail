@@ -82,7 +82,7 @@ export default {
 
       await updateProjectById(project)
       await dispatch('getProjects')
-      commit('SET_PROJECT', data)
+      commit('SET_PROJECT', project)
     },
     async setProject ({ commit, dispatch }, data) {
       dispatch('resetProject')
