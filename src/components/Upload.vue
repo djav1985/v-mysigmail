@@ -197,7 +197,7 @@ export default {
       }
       this.$nextTick(() => {
         this.cropper = new Cropper(this.$refs.cropper, {
-          aspectRatio: this.aspect,
+          aspectRatio: this.aspectRatio,
           viewMode: 1,
           autoCropArea: 1
         })
