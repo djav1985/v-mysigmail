@@ -23,7 +23,7 @@ So let's make creating email signatures easier!
 
 ## Features
 
-- Upload image - upload to AWS S3 or set public link
+- Upload image - upload to a server or set public link
 - Custom fields - add unlimited number of custom fields with different types such as: text, link, email
 - Social icons - add social media links to your signature
 - Options - customize your signature as you like, change color, avatar shape, font and more
@@ -42,11 +42,7 @@ So let's make creating email signatures easier!
 Set env variables
 
 ```bash
-VUE_APP_AWS_S3_URL=
-VUE_APP_AWS_S3_BASKET=
-VUE_APP_AWS_S3_ID=
-VUE_APP_AWS_S3_KEY=
-VUE_APP_AWS_S3_REGION=
+VUE_APP_API_URL=http://localhost:3000
 ```
 Run
 
@@ -54,6 +50,20 @@ Run
 npm i
 npm run serve
 ```
+
+### Server
+
+The repository includes a small Express backend to handle file uploads.
+
+```bash
+cd server
+npm install
+npm start
+```
+
+The server listens on port `3001` by default and exposes `POST /api/upload`.
+Uploaded files are stored in `server/uploads/` and served statically, so they
+can be accessed from the Vue application via `/uploads/<filename>`.
 
 ## Support project
 
