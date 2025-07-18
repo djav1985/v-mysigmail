@@ -66,7 +66,6 @@
 </template>
 
 <script>
-import S3 from 'aws-sdk/clients/s3'
 import { guid } from '@/util/helpers'
 import Cropper from 'cropperjs'
 import 'cropperjs/dist/cropper.css'
@@ -136,7 +135,7 @@ export default {
     },
     async onUpload (data) {
       try {
-        const url = await this.uploadToS3()
+        const url = await this.uploadToServer()
         if (url) {
           this.$emit('upload', url)
         }
@@ -147,13 +146,7 @@ export default {
         this.fileRaw = ''
       }
     },
-    async uploadToS3 () {
-      const bucket = new S3({
-        accessKeyId: process.env.VUE_APP_API_URL,
-        secretAccessKey: process.env.VUE_APP_API_URL,
-        region: process.env.VUE_APP_API_URL
-      })
-
+    async uploadToServer () {
       const name = this.fileRaw.name
       const match = name && name.match(/\.(jpg|jpeg|png)$/i)
       if (!match) {
@@ -161,24 +154,23 @@ export default {
         this.$message({ message, type: 'error' })
         throw new Error(message)
       }
-      const ext = match[0]
-      const date = new Date().toJSON().substr(0, 10)
-      const file = `${date}-${guid()}${ext}`
-      const key = `upload/${file}`
+
       const croppedImage = await this.getCroppedImage()
 
-      return new Promise((resolve, reject) => {
-        bucket.putObject({
-          Bucket: process.env.VUE_APP_API_URL,
-          Key: key,
-          ContentType: this.fileRaw.type,
-          Body: croppedImage.blob
-        }, (err, data) => {
-          if (err) return reject(err)
-          const res = process.env.VUE_APP_API_URL + '/' + key
-          return resolve(res)
-        })
+      const formData = new FormData()
+      formData.append('file', croppedImage.blob, this.fileRaw.name)
+
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData
       })
+
+      if (!response.ok) {
+        throw new Error('Upload failed')
+      }
+
+      const result = await response.json()
+      return result.url
     },
     changeAspectRation (aspect) {
       this.aspectRatio = aspect
