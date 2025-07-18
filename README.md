@@ -55,6 +55,20 @@ npm i
 npm run serve
 ```
 
+### Server
+
+The repository includes a small Express backend to handle file uploads.
+
+```bash
+cd server
+npm install
+npm start
+```
+
+The server listens on port `3001` by default and exposes `POST /api/upload`.
+Uploaded files are stored in `server/uploads/` and served statically, so they
+can be accessed from the Vue application via `/uploads/<filename>`.
+
 ## Support project
 
 If you liked the project, I am very grateful for the help to the project.
