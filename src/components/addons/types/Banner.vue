@@ -82,7 +82,7 @@ export default {
       this.$store.dispatch('updateBanner', { image: this.url })
     },
     onClearImageLink () {
-      this.imageLink = ''
+      this.url = ''
       this.onAddImageLink()
     }
   }
