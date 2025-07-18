@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "release": "sh ./build/bin/release.sh",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "dev": "concurrently \"npm run serve\" \"npm start --prefix server\""
   },
   "dependencies": {
     "chalk": "^2.4.2",
@@ -34,8 +35,10 @@
     "node-sass": "^4.11.0",
     "sass-loader": "^7.0.1",
     "vue-svg-loader": "^0.11.0",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.5.17",
+    "concurrently": "^7.6.0"
   },
+  "postinstall": "npm install --prefix server",
   "gitHooks": {
     "pre-commit": "lint-staged",
     "commit-msg": "node scripts/verify-commit.js"
