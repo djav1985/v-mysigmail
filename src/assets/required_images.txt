@@ -1,0 +1,2 @@
+app-store-badge.png
+google-play-badge.png
