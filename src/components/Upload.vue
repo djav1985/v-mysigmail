@@ -135,10 +135,17 @@ export default {
       }
     },
     async onUpload (data) {
-      const url = await this.uploadToS3()
-      this.$emit('upload', url)
-      this.showCropDialog = false
-      this.fileRaw = ''
+      try {
+        const url = await this.uploadToS3()
+        if (url) {
+          this.$emit('upload', url)
+        }
+      } catch (err) {
+        console.error(err)
+      } finally {
+        this.showCropDialog = false
+        this.fileRaw = ''
+      }
     },
     async uploadToS3 () {
       const bucket = new S3({
@@ -148,7 +155,13 @@ export default {
       })
 
       const name = this.fileRaw.name
-      const ext = name.match(/.jpg|.jpeg|.png$/i)[0]
+      const match = name && name.match(/\.(jpg|jpeg|png)$/i)
+      if (!match) {
+        const message = 'Uploaded file should be a .jpg or .png.'
+        this.$message({ message, type: 'error' })
+        throw new Error(message)
+      }
+      const ext = match[0]
       const date = new Date().toJSON().substr(0, 10)
       const file = `${date}-${guid()}${ext}`
       const key = `upload/${file}`
