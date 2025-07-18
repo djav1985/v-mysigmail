@@ -122,7 +122,7 @@
                             <a :href="formatLink(item.link)">
                               <img
                                 width="12px"
-                                :src="`${process.env.VUE_APP_API_URL}/icons/${item.icon}.png`"
+                                :src="iconUrl(`${item.icon}.png`)"
                                 :alt="`social-icon-${item.icon}`"
                                 style="display: table-cell; vertical-align: middle;"
                               >
@@ -195,12 +195,14 @@
 import EmailTemplate from './emailTemplate'
 import PromoteSignature from './components/PromoteSignature'
 import Avatar from './components/Avatar'
+import { iconUrl } from '../../util/icon'
 
 export default {
   components: {
     Avatar,
     PromoteSignature
   },
+  methods: { iconUrl },
   extends: EmailTemplate
 }
 </script>
