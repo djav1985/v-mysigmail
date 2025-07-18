@@ -149,9 +149,9 @@ export default {
     },
     async uploadToS3 () {
       const bucket = new S3({
-        accessKeyId: process.env.VUE_APP_AWS_S3_ID,
-        secretAccessKey: process.env.VUE_APP_AWS_S3_KEY,
-        region: process.env.VUE_APP_AWS_S3_REGION
+        accessKeyId: process.env.VUE_APP_API_URL,
+        secretAccessKey: process.env.VUE_APP_API_URL,
+        region: process.env.VUE_APP_API_URL
       })
 
       const name = this.fileRaw.name
@@ -169,13 +169,13 @@ export default {
 
       return new Promise((resolve, reject) => {
         bucket.putObject({
-          Bucket: process.env.VUE_APP_AWS_S3_BASKET,
+          Bucket: process.env.VUE_APP_API_URL,
           Key: key,
           ContentType: this.fileRaw.type,
           Body: croppedImage.blob
         }, (err, data) => {
           if (err) return reject(err)
-          const res = process.env.VUE_APP_AWS_S3_URL + '/' + key
+          const res = process.env.VUE_APP_API_URL + '/' + key
           return resolve(res)
         })
       })

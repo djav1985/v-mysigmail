@@ -23,7 +23,7 @@ So let's make creating email signatures easier!
 
 ## Features
 
-- Upload image - upload to AWS S3 or set public link
+- Upload image - upload to a server or set public link
 - Custom fields - add unlimited number of custom fields with different types such as: text, link, email
 - Social icons - add social media links to your signature
 - Options - customize your signature as you like, change color, avatar shape, font and more
@@ -42,11 +42,7 @@ So let's make creating email signatures easier!
 Set env variables
 
 ```bash
-VUE_APP_AWS_S3_URL=
-VUE_APP_AWS_S3_BASKET=
-VUE_APP_AWS_S3_ID=
-VUE_APP_AWS_S3_KEY=
-VUE_APP_AWS_S3_REGION=
+VUE_APP_API_URL=http://localhost:3000
 ```
 Run
 
