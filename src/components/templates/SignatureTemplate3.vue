@@ -113,7 +113,7 @@
                             <a :href="formatLink(item.link)">
                               <img
                                 width="12px"
-                                :src="`${s3url}/icons/${item.icon}.png`"
+                                :src="`${process.env.VUE_APP_API_URL}/icons/${item.icon}.png`"
                                 :alt="`social-icon-${item.icon}`"
                                 style="display: table-cell; vertical-align: middle;"
                               >

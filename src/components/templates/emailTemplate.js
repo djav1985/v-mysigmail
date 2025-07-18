@@ -4,8 +4,7 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      filterFields: ['Full name', 'Job title', 'Company'],
-      s3url: process.env.VUE_APP_API_URL
+      filterFields: ['Full name', 'Job title', 'Company']
     }
   },
 
