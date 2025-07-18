@@ -44,24 +44,15 @@ Set env variables
 ```bash
 VUE_APP_API_URL=http://localhost:3000
 ```
-Run
+Install dependencies and start the development servers:
 
 ```bash
-npm i
-npm run serve
-```
-
-### Server
-
-The repository includes a small Express backend to handle file uploads.
-
-```bash
-cd server
 npm install
-npm start
+npm run dev
 ```
 
-The server listens on port `3001` by default and exposes `POST /api/upload`.
+The `dev` script starts the Vue application and the Express backend concurrently.
+The server listens on port `3001` and exposes `POST /api/upload`.
 Uploaded files are stored in `server/uploads/` and served statically, so they
 can be accessed from the Vue application via `/uploads/<filename>`.
 
