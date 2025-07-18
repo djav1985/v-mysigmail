@@ -170,7 +170,7 @@ export default {
       this.$store.dispatch('updateImage', { link: this.imageUrl })
     },
     onClearImageLink () {
-      this.imageLink = ''
+      this.imageUrl = ''
       this.onAddLink()
     },
     onUpload (url) {
